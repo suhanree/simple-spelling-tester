@@ -3,6 +3,7 @@ This small program is created to help my daughter to practice for her spelling
 bee competition.
 
 We were given a list of words with origins:
+
 1. Arabic
 2. Asian
 3. Dutch
