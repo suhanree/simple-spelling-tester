@@ -7,17 +7,27 @@ def main():
     """
 
     # Filenames
-    input_filenames = ['words_arabic', 'words_dutch', 'words_french',
-        'words_greek', 'words_japanese', 'words_new_world', 'words_slavic',
-        'words_asian', 'words_eponyms', 'words_german', 'words_italian',
-        'words_latin', 'words_old_english', 'words_spanish']
+    input_filenames = ['words_arabic', 
+        'words_asian', 
+        'words_dutch', 
+        'words_eponyms', 
+        'words_french',
+        'words_german', 
+        'words_greek', 
+        'words_italian',
+        'words_japanese', 
+        'words_latin', 
+        'words_new_world', 
+        'words_old_english', 
+        'words_slavic',
+        'words_spanish']
     # Add the relative path of files.
     input_filenames = map(lambda x: '../data/'+x, input_filenames)
 
-    output_filename = 'words.csv'
+    word_filename = '../data/words.csv'
     
     # opening csv file.
-    f_csv = open(output_filename, 'wb')
+    f_csv = open(word_filename, 'wb')
     f_csv.write('word,origin,difficulty\n')   # header
 
     # Reading all input files and extracting words.
