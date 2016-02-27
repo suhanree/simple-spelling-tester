@@ -33,7 +33,5 @@ Then a helper can read the word one by one.
 While running the program, a user can change the difficulty level, or quit at any word.
 If the program is quit, or all the chosen words are used, changed difficulty
 levels will be saved to a file.
-pronunciation as another attribute added. Then a user can self-test using this
-program.
 
 I used python with pandas.
