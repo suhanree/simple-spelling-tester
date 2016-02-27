@@ -31,7 +31,7 @@ only have 1 or 2, and chanllenge words 3 or 4.
 Now a helper can generate shuffled words using the origin and the difficulty level. 
 Then a helper can read the word one by one.
 While running the program, a user can change the difficulty level, or quit at any word.
-If the program is quit, or all the chosen words are used, changed difficulty
+If 'quit' is chosen, or all the chosen words are used, changed difficulty
 levels will be saved to a file.
 
 I used python with pandas.
