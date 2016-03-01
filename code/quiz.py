@@ -69,7 +69,7 @@ def get_input():
     print "   3: challenging-easy"
     print "   4: challenging-hard"
 
-    print "Type a number, or a series of numbers seperated by white spaces."
+    print "Type a number, or a series of numbers separated by white spaces."
 
     origins_str = raw_input("Enter origins: ")
     difficulties_str = raw_input("Enter difficulties: ")
@@ -91,7 +91,7 @@ def get_input():
             if val < 0 or val > num_difficulties:
                 raise RangeError
     except ValueError:
-        print "# Bad input. Type integers seperated by white spaces only."
+        print "# Bad input. Type integers separated by white spaces only."
         sys.exit()
     except RangeError:
         print "# Bad input: integers should be in range."
@@ -157,14 +157,16 @@ def main():
     # The quiz starts.
     # User input: n (default), u (difficulty level up), 
     #             d (difficulty level down), q (quit)
-    for word in chosen_words:
+    n_words = len(chosen_words)
+    for i, word in enumerate(chosen_words):
         origin = origins_all[df.ix[word, 0] - 1]
         difficulty = df.ix[word, 1]
         # print word, origin, difficulty
-        print "-------------------------------------------"
+        print "----------------------------------------------------------"
         print "word: " + word + " (Origin: " + origin + ", Difficulty: " \
-            + str(difficulty) + ")"
-        print "-------------------------------------------"
+            + str(difficulty) + ")" + "(" + str(i + 1) + " of " + str(n_words) \
+            + ")"
+        print "----------------------------------------------------------"
         user_input = "next" # default input
         if difficulty % 2:
             user_input = raw_input(
