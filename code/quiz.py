@@ -50,6 +50,9 @@ origins_all = ["Arabic", "Asian", "Dutch", "Eponyms", "French", "German",
     "Slavic", "Spanish"]
 num_difficulties = 4
 
+# Maximum number for the quiz
+max_num_words = 2000
+
 # Filename for words (in csv, format: word, origin, difficulty, with header)
 word_filename = '../data/words.csv'
 
@@ -71,14 +74,18 @@ def get_input():
 
     print "Type a number, or a series of numbers separated by white spaces."
 
-    origins_str = raw_input("Enter origins: ")
-    difficulties_str = raw_input("Enter difficulties: ")
+    origins_str = raw_input("Enter origins (default: all): ")
+    difficulties_str = raw_input("Enter difficulties (default: all): ")
+    num_words_str = raw_input("Enter the number of words (default: maximal): ")
     origins = origins_str.split()
     if len(origins) == 0: # no input, then the default value is assigned
         origins = ['0']
     difficulties = difficulties_str.split()
     if len(difficulties) == 0: # no input, then the default value is assigned
         difficulties = ['0']
+    num_words = num_words_str.split()
+    if len(num_words) == 0: # no input, then the default value is assigned
+        num_words = ['max']  # 'max' represents maximal number.
 
     # Check if the input has only integers.
     try:
@@ -90,6 +97,8 @@ def get_input():
         for val in difficulties2:
             if val < 0 or val > num_difficulties:
                 raise RangeError
+        num_words2 = (int(num_words[0]) if num_words[0] != 'max' \
+                else max_num_words)
     except ValueError:
         print "# Bad input. Type integers separated by white spaces only."
         sys.exit()
@@ -100,11 +109,11 @@ def get_input():
         sys.exit()
     # If origin=0 or difficulty=0, it should include all possibilities.
     if 0 in origins2:
-        origins2 = range(num_origins + 1)
+        origins2 = range(1, num_origins + 1)
     if 0 in difficulties2:
-        difficulties2 = range(num_difficulties + 1)
+        difficulties2 = range(1, num_difficulties + 1)
     
-    return origins2, difficulties2
+    return origins2, difficulties2, num_words2
 
 # Read word file.
 def read_words(word_filename):
@@ -141,8 +150,8 @@ def main():
     df = read_words(word_filename)
 
     # Get user inputs for origins and difficulties
-    origins, difficulties = get_input()
-    #print origins, difficulties
+    origins, difficulties, num_words = get_input()
+    print origins, difficulties, num_words
 
     # Find the list of words that satisfy conditions given by the user.
     chosen_words = []
@@ -157,23 +166,24 @@ def main():
     # The quiz starts.
     # User input: n (default), u (difficulty level up), 
     #             d (difficulty level down), q (quit)
-    n_words = len(chosen_words)
+    if len(chosen_words) < num_words: # Find the number of words to quiz
+        num_words = len(chosen_words)
     for i, word in enumerate(chosen_words):
         origin = origins_all[df.ix[word, 0] - 1]
         difficulty = df.ix[word, 1]
         # print word, origin, difficulty
         print "----------------------------------------------------------"
         print "word: " + word + " (Origin: " + origin + ", Difficulty: " \
-            + str(difficulty) + ")" + "(" + str(i + 1) + " of " + str(n_words) \
-            + ")"
+            + str(difficulty) + ")" + "(" + str(i + 1) + " of " + \
+            str(num_words) + ")"
         print "----------------------------------------------------------"
         user_input = "next" # default input
         if difficulty % 2:
             user_input = raw_input(
-                    "Type u for difficulty level down, q for quit: ")
+                    "Type u for difficulty level up, q for quit: ")
         else:
             user_input = raw_input(
-                    "type d for difficulty level up, q for quit: ")
+                    "type d for difficulty level down, q for quit: ")
         user_input = user_input.strip()
         if difficulty % 2:
             if user_input == "u":
@@ -181,7 +191,7 @@ def main():
         else:
             if user_input == "d":
                 df.ix[word, 1] = difficulty - 1
-        if user_input == "q":
+        if user_input == "q" or i == num_words - 1:
             break
 
     # Write the changes
