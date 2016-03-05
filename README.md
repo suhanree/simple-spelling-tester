@@ -35,3 +35,11 @@ If 'quit' is chosen, or all the chosen words are used, changed difficulty
 levels will be saved to a file.
 
 I used python with pandas.
+
+## Usage
+1. First run extract.py to generate csv file for all words out of 14 words
+   files. Then words.csv file will be generated in data folder.
+2. Run quiz.py, then the text interface will be appear. A user can choose
+   origins of words, difficulty levels of words, and the number of words for
+   the quiz. Or just enter for default values.
+3. For each word, a user can downgrade/upgrade the difficulty level, or quit.
