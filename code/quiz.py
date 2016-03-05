@@ -1,7 +1,5 @@
 # This program randomly shows a group of words one by one.
 # It should be used by a helper to quiz a spelling bee contestant.
-# If a contestant got a word incorrect, the difficulty level will
-# be updated.
 #
 # Currently there are two attributes for each word: origin and difficulty.
 #
@@ -112,7 +110,6 @@ def get_input():
         origins2 = range(1, num_origins + 1)
     if 0 in difficulties2:
         difficulties2 = range(1, num_difficulties + 1)
-    
     return origins2, difficulties2, num_words2
 
 # Read word file.
@@ -151,7 +148,7 @@ def main():
 
     # Get user inputs for origins and difficulties
     origins, difficulties, num_words = get_input()
-    print origins, difficulties, num_words
+    #print origins, difficulties, num_words
 
     # Find the list of words that satisfy conditions given by the user.
     chosen_words = []
