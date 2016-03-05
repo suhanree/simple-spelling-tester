@@ -43,3 +43,4 @@ I used python with pandas.
    origins of words, difficulty levels of words, and the number of words for
    the quiz. Or just enter for default values.
 3. For each word, a user can downgrade/upgrade the difficulty level, or quit.
+4. Run search.py to search for a word in the list.
