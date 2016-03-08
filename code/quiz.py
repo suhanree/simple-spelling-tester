@@ -168,12 +168,13 @@ def main():
     for i, word in enumerate(chosen_words):
         origin = origins_all[df.ix[word, 0] - 1]
         difficulty = df.ix[word, 1]
+        count = df.ix[word, 2]
         # print word, origin, difficulty
-        print "----------------------------------------------------------"
+        print "--------------------------------------------------------------------"
         print "word: " + word + " (Origin: " + origin + ", Difficulty: " \
-            + str(difficulty) + ")" + "(" + str(i + 1) + " of " + \
-            str(num_words) + ")"
-        print "----------------------------------------------------------"
+            + str(difficulty) + ", Count: " + str(count) + ")(" \
+            + str(i + 1) + " of " + str(num_words) + ")"
+        print "--------------------------------------------------------------------"
         user_input = "next" # default input
         if difficulty % 2:
             user_input = raw_input(
@@ -188,6 +189,7 @@ def main():
         else:
             if user_input == "d":
                 df.ix[word, 1] = difficulty - 1
+        df.ix[word, 2] = count + 1 # Add 1 to the count it was shown
         if user_input == "q" or i == num_words - 1:
             break
 

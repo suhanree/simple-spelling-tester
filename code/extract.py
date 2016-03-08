@@ -28,7 +28,7 @@ def main():
     
     # opening csv file.
     f_csv = open(word_filename, 'wb')
-    f_csv.write('word,origin,difficulty\n')   # header
+    f_csv.write('word,origin,difficulty,count\n')   # header
 
     # Reading all input files and extracting words.
     for i, filename in enumerate(input_filenames):
@@ -45,7 +45,7 @@ def main():
                     difficulty = 4  
                 else:
                     f_csv.write(words[0]+','+ str(i+1) + ',' + str(difficulty)
-                            + '\n')
+                            + ',' + '0\n')
 
 if __name__ == "__main__":
     main()
