@@ -97,7 +97,7 @@ def main():
             row = df.loc[word]
             origin = row['origin']
             difficulty = row['difficulty']
-            print "Word: " + word + " (Origin: " + origins_all[origin] + \
+            print "Word: " + word + " (Origin: " + origins_all[origin - 1] + \
                 ", Difficulty: " + str(difficulty) + ")"
         except KeyError:
             print "# The word does not exist in the list. Try again."
